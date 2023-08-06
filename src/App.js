@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import React, { Suspense, createContext, useContext } from 'react';
 import './App.css';
+import LoginPage from './Components/LoginPage';
+import Loader from './Components/components/Loader';
+import Svgs from './Assets/Svgs'
+import NavigationRoutes from './Components/Navigation';
+
+export const ContextTheme = createContext(Svgs)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <ContextTheme.Provider value={Svgs}>
+      <Suspense fallback={<Loader/>}>
+        <div className="App">
+          <NavigationRoutes />
+        </div>
+      </Suspense>
+    </ContextTheme.Provider>
+    </>
   );
 }
 
